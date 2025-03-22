@@ -11,6 +11,3 @@ class Users(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
     username = Column(String(50), nullable=False)
     hashed_password = Column(String, nullable=False)
-
-    post = relationship("Posts", back_populates="user")
-    comment = relationship("Comments", back_populates="user")
