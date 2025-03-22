@@ -16,6 +16,7 @@ class BaseDAO:
             result = await session.execute(query)
             return result.scalars().all()
 
+    
     @classmethod
     async def find_one_or_none(cls, **filter_by):
         async with async_session_maker() as session:
@@ -23,18 +24,11 @@ class BaseDAO:
             result = await session.execute(query)
             return result.scalars().one_or_none()
     
+
     @classmethod
     async def add(cls, **data):
-        try:
-            async with async_session_maker() as session:
-                query = insert(cls.model).values(**data)
-                await session.execute(query)
-                await session.commit()
-
-        except (SQLAlchemyError, Exception) as e:
-            if isinstance(e, SQLAlchemyError):
-                msg = "Database Exc: Cannot insert data into table"
-            elif isinstance(e, Exception):
-                msg = "Unknown Exc: Cannot insert data into table"
-
+        async with async_session_maker() as session:
+            query = insert(cls.model).values(**data)
+            await session.execute(query)
+            await session.commit()
 
