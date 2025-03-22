@@ -13,8 +13,8 @@ async def get_posts():
     return await PostsDAO.get_all()
 
 
-@router.get("/{post_id}")
+@router.get("/{id}")
 async def get_post(
-    post_id: UUID,
+    id: UUID,
 ):
-    return await PostsDAO.find_one_or_none(id=post_id)
+    return await PostsDAO.find_one_or_none(id=id)
