@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from uuid import UUID, uuid4
 from datetime import datetime
 
@@ -34,3 +34,19 @@ async def add_post(
     post_id = await PostsDAO.add(id=uuid4(), title=data.title, text=data.text, user_id=user.id, datetime_create=datetime.utcnow())
     post = await PostsDAO.find_one_or_none(id=post_id)
     return post
+
+
+@router.delete("/{post_id}")
+async def delete_post(
+    post_id: UUID,
+    user: Users = Depends(get_current_user)
+):
+    post = await PostsDAO.find_one_or_none(id=post_id)
+
+    if (not post) or (user.id != post.user_id):
+        return HTTPException(status_code=409)
+    
+    await PostsDAO.delete(id=post_id)
+
+    return {"ok": True, "msg": "Success delete post"}
+
