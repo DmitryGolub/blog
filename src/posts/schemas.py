@@ -9,3 +9,9 @@ class SPosts(BaseModel):
     text: str
     user_id: UUID
     datetime_create: datetime
+
+
+class SPostsAdd(BaseModel):
+    title: str
+    text: str
+    
