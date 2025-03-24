@@ -4,7 +4,6 @@ from sqlalchemy.orm import relationship
 from src.database import Base
 
 
-
 class Posts(Base):
     __tablename__ = "posts"
 
@@ -14,4 +13,4 @@ class Posts(Base):
     user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
     datetime_create = Column(DateTime, nullable=False, default=func.now())
 
-    comment = relationship("Comments", cascade="all, delete", passive_deletes=True)
+    comments = relationship("Comments", cascade="all, delete", passive_deletes=True)

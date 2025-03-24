@@ -49,4 +49,3 @@ async def delete_post(
     await PostsDAO.delete(id=post_id)
 
     return {"ok": True, "msg": "Success delete post"}
-
