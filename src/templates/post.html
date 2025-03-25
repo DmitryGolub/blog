@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts</title>
+    <title>{{ post.title }}</title>
 </head>
 <body>
-    {% for post in posts %}
     <div>
         <h1>{{ post.title }}</h1>
         {% if post.image_id %}
@@ -14,9 +13,7 @@
         {% endif %}
         <p>{{ post.text }}</p>
         <p>{{ post.datetime_create.strftime('%H:%M %d.%m.%Y') }}</p>
-        <a href="{{ url_for('get_post_by_id_page', post_id=post.id) }}">Read more</a>
         <hr>
     </div>
-    {% endfor %}
 </body>
 </html>

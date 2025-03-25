@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, Request
 from fastapi.templating import Jinja2Templates
-from src.posts.router import get_posts
+from src.posts.router import get_posts, get_post
 
 
 router = APIRouter(
@@ -25,3 +25,14 @@ async def get_posts_page(
 
 
 
+@router.get("/posts/{post_id}")
+async def get_post_by_id_page(
+    request: Request,
+    post = Depends(get_post)
+):
+    context = {
+        "request": request,
+        "post": post,
+    }
+
+    return templates.TemplateResponse(name="post.html", context=context)
