@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+</head>
+<body>
+    {% for post in posts %}
+    <div>
+        <h1>{{ post.title }}</h1>
+        {% if post.image_id %}
+            <img src="{{ url_for('static', path='images/' + post.image_id|string + '.webp') }}" alt="Post photo" width="300">
+        {% endif %}
+        <p>{{ post.text }}</p>
+        <p>{{ post.datetime_create }}</p>
+        <hr>
+    </div>
+    {% endfor %}
+</body>
+</html>
