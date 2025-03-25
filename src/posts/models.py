@@ -2,6 +2,7 @@ from uuid import uuid4
 from sqlalchemy import Column, ForeignKey, UUID, String, DateTime, func
 from sqlalchemy.orm import relationship
 from src.database import Base
+from src.posts.comments.models import Comments
 
 
 class Posts(Base):

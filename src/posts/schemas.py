@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from uuid import UUID
 from datetime import datetime
 
@@ -12,6 +12,5 @@ class SPosts(BaseModel):
 
 
 class SPostsAdd(BaseModel):
-    title: str
+    title: str = Field(max_length=256, min_length=1)
     text: str
-    
