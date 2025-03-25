@@ -13,7 +13,7 @@
             <img src="{{ url_for('static', path='images/' + post.image_id|string + '.webp') }}" alt="Post photo" width="300">
         {% endif %}
         <p>{{ post.text }}</p>
-        <p>{{ post.datetime_create }}</p>
+        <p>{{ post.datetime_create.strftime('%H:%M %d.%m.%Y') }}</p>
         <hr>
     </div>
     {% endfor %}

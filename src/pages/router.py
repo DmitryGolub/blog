@@ -21,4 +21,7 @@ async def get_posts_page(
         "posts": posts,
     }
     
-    return templates.TemplateResponse(name="index.html", context=context)
+    return templates.TemplateResponse(name="posts.html", context=context)
+
+
+
