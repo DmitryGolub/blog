@@ -15,8 +15,8 @@ router = APIRouter(prefix="/posts", tags=["Posts"])
 async def get_comments(
     post_id: UUID
 ) -> list[SComments]:
-    comments = await CommentsDAO.get_all_by_post_id(post_id=post_id)
-    return comments
+    data = await CommentsDAO.get_all_by_post_id(post_id=post_id)
+    return data
 
 
 @router.post("/{post_id}/comments")

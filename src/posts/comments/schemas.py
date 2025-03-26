@@ -9,6 +9,7 @@ class SComments(BaseModel):
     datetime_create: datetime
     post_id: UUID
     user_id: UUID
+    username: str
 
 
 class SCommentsAdd(BaseModel):

@@ -15,5 +15,13 @@
         <p>{{ post.datetime_create.strftime('%H:%M %d.%m.%Y') }}</p>
         <hr>
     </div>
+    <div class="comments">
+        <h2>Comments: </h2>
+        {% for comment in comments %}
+            <h5>{{ comment.username }} </h5>
+            <p>{{ comment.text }}</p>
+            <hr>
+        {% endfor %}
+    </div>
 </body>
 </html>

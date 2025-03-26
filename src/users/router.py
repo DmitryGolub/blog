@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Response, Depends
+from pydantic import UUID4
 
 from src.users.dao import UsersDAO
 from src.users.schemas import SUserAuth
@@ -16,6 +17,12 @@ router = APIRouter(
 @router.get("/me")
 async def get_me(current_user: Users = Depends(get_current_user)):
     return current_user
+
+
+@router.get("/{user_id}")
+async def get_user(user_id: UUID4):
+    user = await UsersDAO.find_one_or_none(id=user_id)
+    return user
 
 
 @router.post("/register")
