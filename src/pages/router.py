@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends, Request
 from fastapi.templating import Jinja2Templates
+
 from src.posts.router import get_posts, get_post
 from src.posts.comments.router import get_comments
+from src.users.dependecies import get_current_user
 
 
 router = APIRouter(
@@ -23,6 +25,18 @@ async def get_posts_page(
     }
     
     return templates.TemplateResponse(name="posts.html", context=context)
+
+
+@router.get("/posts/add_post")
+async def add_post_page(
+    request: Request,
+    user = Depends(get_current_user)
+):
+    context = {
+        "request": request
+    }
+
+    return templates.TemplateResponse(name="add_post.html", context=context)
 
 
 

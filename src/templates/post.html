@@ -6,6 +6,7 @@
     <title>{{ post.title }}</title>
 </head>
 <body>
+    <a href="{{ url_for('add_post_page') }}">ADD POST</a>
     <div>
         <h1>{{ post.title }}</h1>
         {% if post.image_id %}

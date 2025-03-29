@@ -6,6 +6,7 @@
     <title>Posts</title>
 </head>
 <body>
+    <a href="{{ url_for('add_post_page') }}">ADD POST</a>
     {% for post in posts %}
     <div>
         <h1>{{ post.title }}</h1>
