@@ -5,6 +5,7 @@ from passlib.context import CryptContext
 
 from src.users.dao import UsersDAO
 from src.config import settings
+from src.exceptions import IncorrectEmailOrPasswordException
 
 
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -35,7 +36,7 @@ async def authenticate_user(username: str, password: str):
     user = await UsersDAO.find_one_or_none(username=username)
 
     if not user or not verify_password(password, user.hashed_password): 
-        raise HTTPException(status_code=409)
+        raise IncorrectEmailOrPasswordException
     
     return user
 
