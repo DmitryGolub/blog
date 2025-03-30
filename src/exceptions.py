@@ -36,3 +36,13 @@ class UserAlreadyExistsException(PostsException):
 class IncorrectEmailOrPasswordException(PostsException):
     status_code=status.HTTP_401_UNAUTHORIZED
     detail="Неверная почта или пароль"
+
+
+class PostNotFoundException(PostsException):
+    status_code=status.HTTP_404_NOT_FOUND
+    detail="Пост не найден"
+
+
+class UserIsNotAuthorPostException(PostsException):
+    status_code=status.HTTP_409_CONFLICT
+    detail="Вы не являетесь автором этого поста"

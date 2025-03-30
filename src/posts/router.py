@@ -6,6 +6,7 @@ from src.posts.schemas import SPosts, SPostsAdd
 from src.posts.dao import PostsDAO
 from src.users.models import Users
 from src.users.dependecies import get_current_user
+from src.exceptions import PostNotFoundException, UserIsNotAuthorPostException
 
 
 router = APIRouter(
@@ -43,8 +44,10 @@ async def delete_post(
 ):
     post = await PostsDAO.find_one_or_none(id=post_id)
 
-    if (not post) or (user.id != post.user_id):
-        return HTTPException(status_code=409)
+    if not post:
+        return PostNotFoundException
+    elif user.id != post.user_id:
+        return UserIsNotAuthorPostException
     
     await PostsDAO.delete(id=post_id)
 
