@@ -1,6 +1,7 @@
 from fastapi import Depends, APIRouter
 from uuid import uuid4, UUID
 from datetime import datetime
+from fastapi_cache.decorator import cache
 
 from src.posts.comments.dao import CommentsDAO
 from src.posts.comments.schemas import SCommentsAdd, SComments
@@ -12,6 +13,7 @@ router = APIRouter(prefix="/posts", tags=["Posts"])
 
 
 @router.get("/{post_id}/comments")
+@cache(expire=60)
 async def get_comments(
     post_id: UUID
 ) -> list[SComments]:
