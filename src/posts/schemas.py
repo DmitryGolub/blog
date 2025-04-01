@@ -14,4 +14,4 @@ class SPosts(BaseModel):
 class SPostsAdd(BaseModel):
     title: str = Field(max_length=256, min_length=1)
     text: str
-    image_id: int = Field(ge=1)
+    image_id: int = Field(ge=1, le=2147483647)
