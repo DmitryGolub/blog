@@ -16,6 +16,8 @@ sqlalchemy = "^2.0.39"
 python-jose = "^3.4.0"
 passlib = "^1.7.4"
 fastapi-cache2 = {extras = ["redis"], version = "^0.2.2"}
+celery = "^5.5.0"
+flower = "^2.0.1"
 
 
 [build-system]
