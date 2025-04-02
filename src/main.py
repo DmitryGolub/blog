@@ -13,6 +13,8 @@ from src.posts.router import router as posts_router
 from src.users.router import router as users_router
 from src.posts.comments.router import router as comments_router
 from src.images.router import router as router_images
+from src.config import settings
+
 
 app = FastAPI()
 
@@ -28,5 +30,5 @@ app.include_router(router_images)
 
 @app.on_event("startup")
 async def startup():
-    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    redis = aioredis.from_url(f"redis://{settings.REDIS_HOST}:{settings.REDIS_PORT}", encoding="utf8", decode_responses=True)
     FastAPICache.init(RedisBackend(redis), prefix="cache")

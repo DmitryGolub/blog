@@ -7,6 +7,8 @@ from src.users.auth import get_password_hash, authenticate_user, create_access_t
 from src.users.dependecies import get_current_user
 from src.users.models import Users
 from src.exceptions import UserAlreadyExistsException, IncorrectEmailOrPasswordException
+from src.tasks.tasks import send_usern_confirmation_email
+from src.config import settings
 
 
 router = APIRouter(
@@ -31,7 +33,10 @@ async def register(
     
     hashed_password = get_password_hash(data.password) # хэшируем пароль
     
-    await UsersDAO.add(username=data.username, hashed_password=hashed_password) # добавляем пользователя в бд
+    user_id = await UsersDAO.add(username=data.username, hashed_password=hashed_password) # добавляем пользователя в бд
+    user = await UsersDAO.find_one_or_none(id=user_id)
+
+    send_usern_confirmation_email.delay(username=user.username, email_to=settings.SMTP_USER)
 
     return {"ok": True, "msg": "User has been succesfully registed"}
 
