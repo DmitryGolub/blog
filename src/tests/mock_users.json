@@ -1,0 +1,12 @@
+[
+    {
+        "id": "11111111-1111-1111-1111-111111111111",
+        "username": "User1",
+        "hashed_password": "$2b$12$iIgUtZZgjd02CXUb5e31RudCvRTmy2d2F9/ipODZoqvCqt6OnTFna"
+    },
+    {
+        "id": "11111111-1111-1111-1111-111111111112",
+        "username": "User2",
+        "hashed_password": "$2b$12$iIgUtZZgjd02CXUb5e31RudCvRTmy2d2F9/ipODZoqvCqt6OnTFna"
+    }
+]

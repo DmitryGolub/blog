@@ -1,4 +1,5 @@
 from pydantic_settings import BaseSettings
+from pydantic import ConfigDict
 from typing import Literal
 
 
@@ -37,7 +38,7 @@ class Settings(BaseSettings):
     REDIS_HOST: str
     REDIS_PORT: int
  
-    class Config:
+    class Config(ConfigDict):
         env_file = ".env"
 
 
