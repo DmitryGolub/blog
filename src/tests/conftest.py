@@ -3,6 +3,10 @@ import json
 import asyncio
 from sqlalchemy import insert
 from datetime import datetime
+from fastapi.testclient import TestClient
+from httpx import AsyncClient
+from httpx import ASGITransport
+
 
 from src.database import Base, async_session_maker, engine
 from src.config import settings
@@ -12,10 +16,6 @@ from src.posts.comments.models import Comments
 from src.users.models import Users
 
 from src.main import app as fastapi_app
-
-from fastapi.testclient import TestClient
-from httpx import AsyncClient
-
 
 @pytest.fixture(scope="session", autouse=True)
 async def prepare_database():
@@ -57,11 +57,6 @@ def event_loop(request):
 
 @pytest.fixture(scope="function")
 async def ac():
-    async with AsyncClient(app=fastapi_app, base_url="http://test") as ac:
+    transport = ASGITransport(app=fastapi_app)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
         yield ac
-
-
-@pytest.fixture(scope="function")
-async def session():
-    async with async_session_maker() as session:
-        yield session
