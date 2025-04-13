@@ -60,3 +60,16 @@ async def ac():
     transport = ASGITransport(app=fastapi_app)
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
         yield ac
+
+
+@pytest.fixture(scope="session")
+async def authenticated_ac():
+    transport = ASGITransport(app=fastapi_app)
+    async with AsyncClient(transport=transport, base_url="http://test") as ac:
+        await ac.post("/users/login", json={
+            "username": "User1",
+            "password": "string",
+        })
+        assert ac.cookies["access_token"]
+        yield ac
+
