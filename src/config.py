@@ -7,6 +7,10 @@ class Settings(BaseSettings):
     MODE: Literal["DEV", "TEST", "PROD"]
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 
+    postgres_db: str
+    postgres_user: str
+    postgres_password: str
+
     DB_HOST: str
     DB_USER: str
     DB_PASS: str
